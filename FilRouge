@@ -1,0 +1,90 @@
+Dans une boucle:
+    1/ Prendre le plus Grand
+    2/ Mettre la clé dans une ArrayListe
+    3/ Supprimer la valeur de la map
+
+Je trie la liste des valeurs
+
+
+
+
+
+
+Petit code
+        // Trie de la chaine de chr
+        //        Collections.sort(liste,Collections.reverseOrder());
+        //        return liste;
+
+
+
+                         this.ChaineCaracteres = ChaineCaracteres;
+                                this.Dictionnaire = new HashMap<String, Integer>();
+                                Dictionnaire.put("a",0);
+                                Dictionnaire.put("b",0);
+                                Dictionnaire.put("c",0);
+                                Dictionnaire.put("d",0);
+                                Dictionnaire.put("e",0);
+                                Dictionnaire.put("f",0);
+                                Dictionnaire.put("g",0);
+                                Dictionnaire.put("h",0);
+                                Dictionnaire.put("i",0);
+                                Dictionnaire.put("j",0);
+                                Dictionnaire.put("k",0);
+                                Dictionnaire.put("l",0);
+                                Dictionnaire.put("m",0);
+                                Dictionnaire.put("n",0);
+                                Dictionnaire.put("o",0);
+                                Dictionnaire.put("p",0);
+                                Dictionnaire.put("q",0);
+                                Dictionnaire.put("r",0);
+                                Dictionnaire.put("s",0);
+                                Dictionnaire.put("t",0);
+                                Dictionnaire.put("u",0);
+                                Dictionnaire.put("v",0);
+                                Dictionnaire.put("w",0);
+                                Dictionnaire.put("x",0);
+                                Dictionnaire.put("y",0);
+                                Dictionnaire.put("z",0);
+
+
+
+
+
+
+
+
+
+
+    // -----------------------------------------------------------------------------------------------------------------
+    /* public void frequence(){
+        int j = 0;
+        String a;
+        HashMap<String, Integer> bis = new HashMap<String, Integer>();
+        // Ajout des fréquence d'apparition de chaques lettre dans this.Dictionnaire
+        for (String i : this.Dictionnaire.keySet()){
+            // Compte le nombre de fois ou la lettre i apparait dans la chaine de cara
+            Integer aa = StringUtils.countMatches(this.ChaineCaracteres,i);
+            this.Dictionnaire.put(i,aa);
+        }
+
+        // Tri de la HashMap
+        for (String i : this.Dictionnaire.keySet()){
+
+            int monNombre = this.Dictionnaire.get(i);
+            String lettre = i;
+            System.out.println(this.getDictionnaire());
+
+            for (String k : this.Dictionnaire.keySet()){
+                System.out.println(this.Dictionnaire.get(k) +" " +monNombre);
+                if ( this.Dictionnaire.get(k) >= monNombre ){
+                    monNombre = this.Dictionnaire.get(k);
+                    lettre = k;
+                }
+            }
+            bis.put(lettre,monNombre);
+            this.Dictionnaire.remove(lettre);
+        }
+
+        }
+
+*/

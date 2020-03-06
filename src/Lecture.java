@@ -11,14 +11,18 @@ public class Lecture {
     private HashMap<Character , Integer> Dictionnaire;
     private BufferedReader read = null;
 
-    // -----------------------------------------------------------------------------------------------------------------
 
-    public Lecture(String ChaineCaracteres) throws IOException {
+    /**
+     * Constructeur de la classe Lecture
+     * @param Url Chemain du fichier à encoder
+     * @throws IOException
+     */
+    public Lecture(String Url) throws IOException {
 
        this.Dictionnaire = new HashMap<Character, Integer>();
 
         try {
-            this.read = new BufferedReader(new FileReader(ChaineCaracteres));
+            this.read = new BufferedReader(new FileReader(Url));
         }
         catch(FileNotFoundException exc)
         {
@@ -41,10 +45,17 @@ public class Lecture {
         this.read.close();
 
     }
-    // -----------------------------------------------------------------------------------------------------------------
 
+    /**
+     *
+     * @return la HashMap comportant les char ainsi que leurs fréquence
+     */
     public HashMap<Character,Integer> getDictionnaire(){return  this.Dictionnaire; }
 
+    /**
+     *
+     * @return une HashMap trié par ordre croissant des fréquences
+     */
     public HashMap<Character, Integer> trierFreq() {
 
         List linkedlist = new LinkedList(this.Dictionnaire.entrySet());
@@ -62,6 +73,11 @@ public class Lecture {
         return sortedHashMap;
     }
 
+
+    /**
+     *
+     * @return une HashMap trié par ordre croissant des codes ASCII des chars
+     */
     public HashMap<Character, Integer> trierASCII(){
         HashMap<Character,Integer> maHM= new HashMap<Character,Integer>();
         Map<Character, Integer> map = new TreeMap<Character, Integer>(this.Dictionnaire);

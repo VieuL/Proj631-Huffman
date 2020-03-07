@@ -11,6 +11,7 @@ public class Constructeur {
         return listeNoeud;
     }
 
+
     /**
      * Cette classe va servir a construire l'arbre
      * @param Data
@@ -20,6 +21,7 @@ public class Constructeur {
         this.Dictionnaire = Data.trierFreq();
         this.listeNoeud = new ArrayList<Noeud>();
     }
+
 
     /**
      *
@@ -71,8 +73,15 @@ public class Constructeur {
     }
 
 
+    /**
+     * Cette fonction permet de construire deux Noeuds a partir du résultat de la fonction Constructeur
+     * de plus elle supprime les caractères utilisés
+     */
     public void ConstructionNoeud(){
+        System.out.println("JE SUIS entée");
         HashMap<Character,Integer> plusPetit = DeuxPlusPetit();
+        System.out.println(plusPetit);
+//        System.out.println(plusPetit.values() + "\n" + plusPetit.keySet());
         int premierElementVal = (int) plusPetit.values().toArray()[0];
         int deuxiemeElementVal = (int) plusPetit.values().toArray()[1];
 
@@ -85,16 +94,17 @@ public class Constructeur {
              first = new Noeud(premierElementKey,premierElementVal,null,null,null);
             this.listeNoeud.add(first);
         }
+        else {
+            first = new Noeud(null,premierElementVal,null,null,null);
+            this.listeNoeud.add(first);
+        }
+
+
         if (deuxiemeElementKey != null){
              sec = new Noeud(deuxiemeElementKey,deuxiemeElementVal,null,null,null);
             this.listeNoeud.add(sec);
         }
-
-        if (premierElementKey == null){
-             first = new Noeud(null,premierElementVal,null,null,null);
-            this.listeNoeud.add(first);
-        }
-        if (deuxiemeElementKey == null){
+        else{
              sec = new Noeud(null,deuxiemeElementVal,null,null,null);
             this.listeNoeud.add(sec);
         }
@@ -102,7 +112,15 @@ public class Constructeur {
         // Création du noeud père
 
         this.listeNoeud.add(new Noeud(null,(premierElementVal + deuxiemeElementVal),sec,first,null));
+        System.out.println("JE SUIS SORTIT");
+    }
 
+
+
+    public void testConstruction(){
+        for (int i = 0; i < 5; i++){
+            ConstructionNoeud();
+            System.out.println("fin de la boucle de construction" + "\n\n");
+        }
     }
 }
-

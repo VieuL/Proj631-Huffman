@@ -6,7 +6,7 @@ public class Noeud {
     private Noeud gauche;
     private Noeud pere;
 
-    public Noeud(Character caractere,int poids, Noeud droit, Noeud gauche, Noeud pere){
+    public Noeud(Character caractere,int poids, Noeud gauche, Noeud droit, Noeud pere){
         this.caractere = caractere;
         this.poids = poids;
         this.droit = droit;
@@ -19,7 +19,7 @@ public class Noeud {
     public Noeud getDroit(){return  this.droit;}
     public Noeud getGauche(){return this.gauche;}
     public Noeud getPere(){return this.pere;}
-    public char getCaractere(){return this.caractere;}
+    public Character getCaractere(){return this.caractere;}
 
     //Création des setteurs
     public void setPoids(int p){this.poids = p;}

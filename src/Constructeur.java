@@ -3,9 +3,8 @@ import java.util.HashMap;
 
 public class Constructeur {
     private Lecture Data;
-    private HashMap<Character,Integer> Dictionnaire;
+    private HashMap<Character, Integer> Dictionnaire;
     private ArrayList<Noeud> listeNoeud;
-
     // Création des getteurs
     public ArrayList<Noeud> getListeNoeud() {
         return listeNoeud;
@@ -14,113 +13,79 @@ public class Constructeur {
 
     /**
      * Cette classe va servir a construire l'arbre
+     *
      * @param Data
      */
-    public Constructeur(Lecture Data){
+    public Constructeur(Lecture Data) {
         this.Data = Data;
         this.Dictionnaire = Data.trierFreq();
         this.listeNoeud = new ArrayList<Noeud>();
+        creation();
+        creationArbre();
+    }
+
+
+
+    private void creation() {
+        for (int i = 0; i < this.Dictionnaire.size(); i++) {
+            int premierElementVal = (int) this.Dictionnaire.values().toArray()[i];
+            Character premierElementKey = (char) this.Dictionnaire.keySet().toArray()[i];
+            Noeud enCours = new Noeud(premierElementKey, premierElementVal, null, null, null);
+            this.listeNoeud.add(enCours);
+        }
     }
 
 
     /**
-     *
-     * @return Retourne une HashMap<Character,Integer> qui contient les deux plus petit noeuds de la liste de noeuds ou du dic
+     * Cette fonction trie la liste
      */
-    public HashMap<Character,Integer> DeuxPlusPetit(){
-        HashMap<Character,Integer> aRetourner = new HashMap<Character,Integer>();
-
-        // Récupération des deux premières valeurs de  la liste
-        int premierElementVal = (int) this.Dictionnaire.values().toArray()[0];
-        int deuxiemeElementVal = (int) this.Dictionnaire.values().toArray()[1];
-
-        Character premierElementKey = (char) this.Dictionnaire.keySet().toArray()[0];
-        Character deuxiemeElementKey = (char) this.Dictionnaire.keySet().toArray()[1];
-
-        int changement1 = 0;
-        int changement2 = 0;
-
-        // Nous regardons si il n'y a pas un noeud avec une valeurs plus petit dans la liste
-        for (Noeud i : this.listeNoeud){
-
-            if ((i.getPoids() < premierElementVal) && (i.getPere() == null)){
-                premierElementVal = i.getPoids();
-                premierElementKey = null;
-                changement1 = 1;
+    private void trieListe(){
+        ArrayList<Noeud> liste= this.getListeNoeud();
+        ArrayList<Noeud> listeT= new ArrayList<Noeud>();
+        int a = (int) Float.POSITIVE_INFINITY;
+        int index = -1;
+        Noeud petit = null;
+        while (liste.size()!=0){
+            for(Noeud i: liste){
+                if(i.getPoids() < a) {
+                    a = i.getPoids();
+                    petit = i;
+                    index = liste.indexOf(i);
+                }
             }
-
-            if ((i.getPoids() < deuxiemeElementVal) && (i.getPere() == null)){
-                deuxiemeElementVal = i.getPoids();
-                deuxiemeElementKey = null;
-                changement2 = 1;
-            }
-
+            liste.remove(index);
+            listeT.add(petit);
+             a =(int) Float.POSITIVE_INFINITY;
+             index = 0;
+             petit = null;
         }
-
-        // Supp des plus petit valeur de Dictionnaire
-        if (changement1 == 0){
-            this.Dictionnaire.remove(premierElementKey);
-        }
-
-        if (changement2 == 0){
-            this.Dictionnaire.remove(deuxiemeElementKey);
-        }
-
-    aRetourner.put(premierElementKey,premierElementVal);
-    aRetourner.put(deuxiemeElementKey,deuxiemeElementVal);
-    return aRetourner;
-
+        this.listeNoeud = listeT;
     }
 
 
-    /**
-     * Cette fonction permet de construire deux Noeuds a partir du résultat de la fonction Constructeur
-     * de plus elle supprime les caractères utilisés
-     */
-    public void ConstructionNoeud(){
-        System.out.println("JE SUIS entée");
-        HashMap<Character,Integer> plusPetit = DeuxPlusPetit();
-        System.out.println(plusPetit);
-//        System.out.println(plusPetit.values() + "\n" + plusPetit.keySet());
-        int premierElementVal = (int) plusPetit.values().toArray()[0];
-        int deuxiemeElementVal = (int) plusPetit.values().toArray()[1];
+    public void deuxPlusPetit(){
+        Noeud premier = this.listeNoeud.get(0);
+        Noeud second = this.listeNoeud.get(1);
+        Noeud pere = new Noeud(null,(premier.getPoids() + second.getPoids()),premier,second,null);
+        this.listeNoeud.add(pere);
+        premier.setPere(pere);
+        second.setPere(pere);
+        this.listeNoeud.remove(premier);
+        this.listeNoeud.remove(second);
+        trieListe();
 
-        Character premierElementKey = (char) plusPetit.keySet().toArray()[0];
-        Character deuxiemeElementKey = (char) plusPetit.keySet().toArray()[1];
+    }
 
-        Noeud first = null;
-        Noeud sec = null;
-        if (premierElementKey != null){
-             first = new Noeud(premierElementKey,premierElementVal,null,null,null);
-            this.listeNoeud.add(first);
+    public void creationArbre(){
+        while (this.listeNoeud.size() > 1){
+            deuxPlusPetit();
         }
-        else {
-            first = new Noeud(null,premierElementVal,null,null,null);
-            this.listeNoeud.add(first);
-        }
-
-
-        if (deuxiemeElementKey != null){
-             sec = new Noeud(deuxiemeElementKey,deuxiemeElementVal,null,null,null);
-            this.listeNoeud.add(sec);
-        }
-        else{
-             sec = new Noeud(null,deuxiemeElementVal,null,null,null);
-            this.listeNoeud.add(sec);
-        }
-
-        // Création du noeud père
-
-        this.listeNoeud.add(new Noeud(null,(premierElementVal + deuxiemeElementVal),sec,first,null));
-        System.out.println("JE SUIS SORTIT");
     }
 
 
-
-    public void testConstruction(){
-        for (int i = 0; i < 5; i++){
-            ConstructionNoeud();
-            System.out.println("fin de la boucle de construction" + "\n\n");
-        }
+    public void afficheArbre(){
+        System.out.println(this.getListeNoeud().get(0).getPoids());
+        System.out.println(this.getListeNoeud().get(0).getGauche().getPoids() + " | " + this.getListeNoeud().get(0).getDroit().getPoids());
     }
 }
+

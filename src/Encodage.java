@@ -90,11 +90,7 @@ public class Encodage {
 
 
     public void encodageTxt() throws IOException {
-        Byte donnees = (byte) 01000000;
-        System.out.println(donnees.getClass());
-        FileOutputStream sortie = new FileOutputStream("data/out/codage");
-
-
+        PrintWriter sortie = new PrintWriter("data/out/codage.txt", StandardCharsets.UTF_8);
         BufferedReader t = this.c.getData().getChaineCaracteres();
 
         while (true){
@@ -106,13 +102,15 @@ public class Encodage {
                 Character carac = ligne.charAt(i);
 
                 String data = this.codage.get(carac);
-                sortie.write(Integer.parseInt(data));
+                sortie.print(data);
+//                sortie.write(Integer.parseInt(data));
             }
 
 
         }
-        sortie.close();
+
         t.close();
+        sortie.close();
     }
 }
 

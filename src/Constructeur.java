@@ -25,6 +25,9 @@ public class Constructeur {
     }
 
 
+    public Lecture getData() {
+        return Data;
+    }
 
     private void creation() {
         for (int i = 0; i < this.Dictionnaire.size(); i++) {

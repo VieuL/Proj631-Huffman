@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Lecture {
-    private String ChaineCaracteres;
+    private BufferedReader ChaineCaracteres = null;
     private HashMap<Character , Integer> Dictionnaire;
     private BufferedReader read = null;
 
@@ -22,6 +22,7 @@ public class Lecture {
 
         try {
             this.read = new BufferedReader(new FileReader(Url));
+            this.ChaineCaracteres = new BufferedReader(new FileReader(Url));
         }
         catch(FileNotFoundException exc)
         {
@@ -43,6 +44,10 @@ public class Lecture {
         }
         this.read.close();
 
+    }
+
+    public BufferedReader getChaineCaracteres() {
+        return ChaineCaracteres;
     }
 
     /**

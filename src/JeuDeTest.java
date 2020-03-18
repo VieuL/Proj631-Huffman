@@ -13,5 +13,6 @@ public class JeuDeTest {
         //Création du dictionnaire de comparaison
         Encodage dic = new Encodage(tree);
         dic.encodageTxt();
+        dic.tradocte();
     }
 }

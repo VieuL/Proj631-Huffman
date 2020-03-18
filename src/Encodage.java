@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,10 +27,18 @@ public class Encodage {
         return codage;
     }
 
+    /**
+     * Cette fonction parcoure l'arbre et implément la HashMap contenant le dictionnaire de passage
+     * La HadhMap prends un char et une String
+     * @param a La chaine de caractère bianaire
+     * @param visit liste des noeud visité par le parcoure
+     * @param courant Noeud en cours d'étude
+     * @return 0 quand la fonction est terminée
+     */
     public int Recherche(String a, ArrayList<Noeud> visit, Noeud courant){
         // Condition d'arret de l'algo
         if(this.constructeur.isEmpty()){
-            return 1;
+            return 0;
         }
         else{
             // Si il y a un fils droit
@@ -90,6 +99,10 @@ public class Encodage {
 
 
     public void encodageTxt() throws IOException {
+        /**
+         *Cette fonction a pour but d'encoder un text en Binaire dans un fichier txt
+         * Attention les 0 et 1 sont codée en 8btis
+         */
         PrintWriter sortie = new PrintWriter("data/out/codage.txt", StandardCharsets.UTF_8);
         BufferedReader t = this.c.getData().getChaineCaracteres();
 
@@ -110,6 +123,28 @@ public class Encodage {
         }
 
         t.close();
+        sortie.close();
+    }
+    public void tradocte() throws IOException {
+        BufferedReader lecture = new BufferedReader(new FileReader("data/out/codage.txt"));
+        FileOutputStream sortie = new FileOutputStream("data/out/compre.txt");
+        while (true){
+            assert lecture != null;
+            String ligne = lecture.readLine();
+            if (ligne == null){break;}
+            String oct = "";
+            for(int i=0; i < ligne.length(); i++){
+                if (oct.length() < 8 ){
+                    oct = oct.concat(String.valueOf(ligne.charAt(i)));
+                }
+                else {
+                    System.out.println(oct);
+                    sortie.write(Integer.parseInt(oct));
+                    oct = "";
+                }
+            }
+        }
+        lecture.close();
         sortie.close();
     }
 }

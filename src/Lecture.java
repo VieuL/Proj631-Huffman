@@ -20,7 +20,6 @@ public class Lecture {
         Scanner user_input = new Scanner( System.in );
         String str = user_input.nextLine();
         String Url = this.listeChoix.get(Integer.parseInt(str));
-        System.out.print("\n" + Url);
         try {
             this.read = new BufferedReader(new FileReader(Url));
             this.ChaineCaracteres = new BufferedReader(new FileReader(Url));

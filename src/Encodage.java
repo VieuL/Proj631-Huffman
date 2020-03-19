@@ -16,7 +16,8 @@ public class Encodage {
         this.constructeur = c.getListeNoeud();
         this.racine = constructeur.get(0);
         creationDic();
-
+        encodageTxt();
+        tradocte();
     }
 
     public Noeud getRacine() {
@@ -79,7 +80,10 @@ public class Encodage {
 
 
     public void creationDic() throws IOException {
-
+        /**
+         * Cette fonction écrit dans un document txt dont voici le chemain "data/out/dictionnairePassage.txt".
+         * Ce fichier contient l'ensemble des charactères du textes et leurs équivalance binaire
+         */
         // Création d'une hashmap avec l'ensemble des char ainsi que leurs équivalance en binaire
         String mons = "";
         ArrayList<Noeud> array= new ArrayList<Noeud>();
@@ -126,6 +130,10 @@ public class Encodage {
         sortie.close();
     }
     public void tradocte() throws IOException {
+        /**
+         * Cette fonction convertie le fichier .txt crée en dessus.
+         * Cette fonction regroupe chaque bits en octe et les convertie en code ASCII
+         */
         BufferedReader lecture = new BufferedReader(new FileReader("data/out/codage.txt"));
         FileOutputStream sortie = new FileOutputStream("data/out/compre.txt");
         while (true){
@@ -138,7 +146,7 @@ public class Encodage {
                     oct = oct.concat(String.valueOf(ligne.charAt(i)));
                 }
                 else {
-                    System.out.println(oct);
+//                    System.out.println(Integer.parseInt(oct));
                     sortie.write(Integer.parseInt(oct));
                     oct = "";
                 }

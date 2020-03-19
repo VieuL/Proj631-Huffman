@@ -1,25 +1,26 @@
-import java.io.FileReader;
+import java.io.*;
 import java.util.HashMap;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 
 public class Lecture {
     private BufferedReader ChaineCaracteres = null;
     private HashMap<Character , Integer> Dictionnaire;
     private BufferedReader read = null;
-
+    private ArrayList<String> listeChoix;
 
     /**
      * Constructeur de la classe Lecture
-     * @param Url Chemain du fichier à encoder
      * @throws IOException
      */
-    public Lecture(String Url) throws IOException {
+    public Lecture() throws IOException {
 
        this.Dictionnaire = new HashMap<Character, Integer>();
-
+        this.listeChoix = choix();
+        System.out.print("Votre choix : ");
+        Scanner user_input = new Scanner( System.in );
+        String str = user_input.nextLine();
+        String Url = this.listeChoix.get(Integer.parseInt(str));
+        System.out.print("\n" + Url);
         try {
             this.read = new BufferedReader(new FileReader(Url));
             this.ChaineCaracteres = new BufferedReader(new FileReader(Url));
@@ -96,7 +97,16 @@ public class Lecture {
         return maHM;
     }
 
-
+    public ArrayList<String> choix() throws IOException {
+        ArrayList<String> liste = new ArrayList<String>();
+        int i =0;
+        for(File nom :  new File("data").listFiles()){
+            if (nom.getName().contains(".txt")){
+                System.out.println("Pour choisir " + nom.getName() + " tapez " + i++);
+                liste.add(String.valueOf(nom.getCanonicalFile()));}
+        }
+        return liste;
+    }
 
 
 

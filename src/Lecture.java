@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.*;
 
 public class Lecture {
-    private BufferedReader ChaineCaracteres = null;
+    private BufferedReader readSauv = null;
     private HashMap<Character , Integer> Dictionnaire;
     private BufferedReader read = null;
     private ArrayList<String> listeChoix;
@@ -22,7 +22,7 @@ public class Lecture {
         String Url = this.listeChoix.get(Integer.parseInt(str));
         try {
             this.read = new BufferedReader(new FileReader(Url));
-            this.ChaineCaracteres = new BufferedReader(new FileReader(Url));
+            this.readSauv = new BufferedReader(new FileReader(Url));
         }
         catch(FileNotFoundException exc)
         {
@@ -46,8 +46,8 @@ public class Lecture {
 
     }
 
-    public BufferedReader getChaineCaracteres() {
-        return ChaineCaracteres;
+    public BufferedReader getReadSauv() {
+        return readSauv;
     }
 
     /**

@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Constructeur {
-    private Lecture Data;
-    private HashMap<Character, Integer> Dictionnaire;
+    private Lecture data;
+    private HashMap<Character, Integer> dictionnaire;
     private ArrayList<Noeud> listeNoeud;
     // Création des getteurs
     public ArrayList<Noeud> getListeNoeud() {
@@ -17,8 +17,8 @@ public class Constructeur {
      * @param Data
      */
     public Constructeur(Lecture Data) {
-        this.Data = Data;
-        this.Dictionnaire = Data.trierFreq();
+        this.data = Data;
+        this.dictionnaire = Data.trierFreq();
         this.listeNoeud = new ArrayList<Noeud>();
         creation();
         creationArbre();
@@ -26,13 +26,17 @@ public class Constructeur {
 
 
     public Lecture getData() {
-        return Data;
+        return data;
     }
 
+
+    /**
+     * La fonction creation crée pour chaque caractères un noeud son poids correspond à sa fréquence.
+     */
     private void creation() {
-        for (int i = 0; i < this.Dictionnaire.size(); i++) {
-            int premierElementVal = (int) this.Dictionnaire.values().toArray()[i];
-            Character premierElementKey = (char) this.Dictionnaire.keySet().toArray()[i];
+        for (int i = 0; i < this.dictionnaire.size(); i++) {
+            int premierElementVal = (int) this.dictionnaire.values().toArray()[i];
+            Character premierElementKey = (char) this.dictionnaire.keySet().toArray()[i];
             Noeud enCours = new Noeud(premierElementKey, premierElementVal, null, null, null);
             this.listeNoeud.add(enCours);
         }
@@ -40,7 +44,7 @@ public class Constructeur {
 
 
     /**
-     * Cette fonction trie la liste
+     * Cette fonction trie la liste dans l'ordre croissant du poids des noeuds.
      */
     private void trieListe(){
         ArrayList<Noeud> liste= this.getListeNoeud();
@@ -66,6 +70,9 @@ public class Constructeur {
     }
 
 
+    /**
+     * Fonction qui récupère les deux noeuds avec le poids le plus faible. Elle crée ensuite leurs père. Pour finir il faur supprimer les noeuds fils de la liste
+     */
     public void deuxPlusPetit(){
         Noeud premier = this.listeNoeud.get(0);
         Noeud second = this.listeNoeud.get(1);
@@ -79,6 +86,9 @@ public class Constructeur {
 
     }
 
+    /**
+     * On exécute la fonction deuxPlusPetit jusqu'a avoir qu'un seul noeuds dans la liste
+     */
     public void creationArbre(){
         while (this.listeNoeud.size() > 1){
             deuxPlusPetit();
@@ -86,6 +96,9 @@ public class Constructeur {
     }
 
 
+    /**
+     * Fonction qui affiche le premiere etage de l'arbre
+     */
     public void afficheArbre(){
         System.out.println(this.getListeNoeud().get(0).getPoids());
         System.out.println(this.getListeNoeud().get(0).getGauche().getPoids() + " | " + this.getListeNoeud().get(0).getDroit().getPoids());

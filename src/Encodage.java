@@ -1,9 +1,7 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Encodage {
     private Noeud racine;
@@ -108,7 +106,7 @@ public class Encodage {
          * Attention les 0 et 1 sont codée en 8btis
          */
         PrintWriter sortie = new PrintWriter("data/out/codage.txt", StandardCharsets.UTF_8);
-        BufferedReader t = this.c.getData().getChaineCaracteres();
+        BufferedReader t = this.c.getData().getReadSauv();
 
         while (true){
 

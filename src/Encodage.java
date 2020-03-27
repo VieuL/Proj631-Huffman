@@ -102,8 +102,8 @@ public class Encodage {
 
     public void encodageTxt() throws IOException {
         /**
-         *Cette fonction a pour but d'encoder un text en Binaire dans un fichier txt
-         * Attention les 0 et 1 sont codée en 8btis
+         * Cette fonction a pour but d'encoder un text en binaire dans un fichier txt
+         * Attention les 0 et 1 sont codée en 8 btis
          */
         PrintWriter sortie = new PrintWriter("data/out/codage.txt", StandardCharsets.UTF_8);
         BufferedReader t = this.c.getData().getReadSauv();
@@ -129,8 +129,8 @@ public class Encodage {
     }
     public void tradocte() throws IOException {
         /**
-         * Cette fonction convertie le fichier .txt crée en dessus.
-         * Cette fonction regroupe chaque bits en octe et les convertie en code ASCII
+         * Cette fonction travail avec le fichier data/out/codage.txt
+         * Elle regroupe chaque bits en octe et les convertie en code ASCII et écrit le résultat dans le fichier data/out/compre.txt
          */
         BufferedReader lecture = new BufferedReader(new FileReader("data/out/codage.txt"));
         FileOutputStream sortie = new FileOutputStream("data/out/compre.txt");
@@ -154,12 +154,15 @@ public class Encodage {
         sortie.close();
     }
 
+    /**
+     * Fonction qui retourne le nombre de bits moyen pour un caractère. Attention la moyenne n'est pas pondérée par la fréquence d'apparition d'un caractère.
+     * @return le nombre moyen de bits par caractère
+     */
     public float nombreBits(){
         int longeur =0;
         for (int i =0; i < this.codage.size(); i++){
-            longeur = longeur + this.codage.values().toArray()[i].toString().length();
+            longeur += this.codage.values().toArray()[i].toString().length();
         }
-
         return (float) longeur/this.codage.size();
     }
 }

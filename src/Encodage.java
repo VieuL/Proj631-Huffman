@@ -153,6 +153,15 @@ public class Encodage {
         lecture.close();
         sortie.close();
     }
+
+    public float nombreBits(){
+        int longeur =0;
+        for (int i =0; i < this.codage.size(); i++){
+            longeur = longeur + this.codage.values().toArray()[i].toString().length();
+        }
+
+        return (float) longeur/this.codage.size();
+    }
 }
 
 

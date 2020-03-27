@@ -10,6 +10,8 @@ public class Main {
 
         //Création du dictionnaire de comparaison
         Encodage encoda = new Encodage(tree);
-
+//        float test1 = encoda.nombreBits();
+        System.out.println("-- Encodage terminé --");
+        System.out.println("Nombre moyen de bits pour un caractère : " + encoda.nombreBits());
          }
 }
